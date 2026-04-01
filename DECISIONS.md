@@ -31,6 +31,7 @@
 | D-10 | Feature selection — developer profile columns | 2 |
 | D-11 | Model sequencing and evaluation metric | 2 |
 | D-12 | Output design — what a PM walks away with | 2 |
+| D-13 | Final feature confirmations from EDA | 2 |
 
 ---
 
@@ -598,6 +599,41 @@ distinguish between funnel stages.
 what a coefficient or importance score is?"
 If yes — ready. If no — rephrase until all statistical
 language is replaced with business language.
+
+---
+
+### D-13 | Final Feature Confirmations from EDA
+
+**AIComplex — confirmed include:**
+Missingness check in 01_eda.ipynb showed AIComplex was answered
+by both intenders and rejectors above the 60% non-null threshold.
+The question is NOT conditionally routed to current users only.
+Include in model with mode imputation for remaining NAs.
+
+**AIFrustration — confirmed include:**
+Both intenders and rejectors answered at sufficient rates (above
+60% non-null threshold). High response rate from non-users confirms
+they have formed opinions about AI tool quality through secondhand
+experience or trial use. Include in model.
+
+**WorkExp — dropped despite r = 0.844 (below 0.85 threshold):**
+Rule said keep both at r < 0.85, but 0.844 is close enough to
+the threshold that multicollinearity risk in Logistic Regression
+remains meaningful. YearsCode retained as it more directly captures
+coding-context experience relevant to AI tool adoption. WorkExp
+dropped. Decision documented for model transparency.
+
+**ICorPM — flagged as likely low-importance predictor:**
+EDA showed near-identical IC/PM split across intenders and
+rejectors (~85% IC in both groups). Kept in for now — Random
+Forest importance score will confirm. Expect near-zero importance,
+likely trimmed before Logistic Regression.
+
+**PurchaseInfluence — flagged as likely low-importance predictor:**
+EDA showed similar influence profiles between intenders and
+rejectors. Active users show higher influence but this appears
+to be a consequence of adoption rather than a predictor of intent.
+Kept in for now — expect low importance in model.
 
 ---
 
