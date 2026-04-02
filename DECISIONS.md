@@ -33,6 +33,7 @@
 | D-12 | Output design — what a PM walks away with | 2 |
 | D-13 | Final feature confirmations from EDA | 2 |
 | D-14 | Modeling results and key findings | 2 |
+| D-15 | Clustering results — three intender personas | 3 |
 
 ---
 
@@ -694,6 +695,50 @@ intender-only group (intenders by definition do not hold very
 unfavorable sentiment at high rates). Clustering on attitude variables
 within intenders may reveal meaningful sub-personas not visible in
 the full intenders-vs-rejectors model.
+
+---
+
+### D-15 | Clustering Results — Three Intender Personas
+
+Optimal k=3 selected. k=4, 5, 6 disqualified — produced clusters of
+only 31 developers, below the 50-developer minimum threshold for
+reliable profiling. Silhouette score 0.1187 — weak but expected for
+binary survey data.
+
+**Cluster 0 — Never-Started Intenders (n=635, 44.2%):**
+93.2% have never used AI for complex tasks and have no formed opinion.
+Blocked by pure inertia — no trial, no friction, no engagement.
+PM intervention: zero-config frictionless trial, one-click install,
+instant output. Remove every barrier between intent and first use.
+
+**Cluster 1 — Engaged Fence-Sitters (n=649, 45.2%):**
+Highest active-learning rate (54.1%), most positive sentiment, blocked
+by ambivalence — tool works but no breakthrough moment yet.
+Closest to crossing over.
+PM intervention: workflow-specific onboarding, use-case targeted first
+win, developer peer case studies.
+
+**Cluster 2 — Quality-Disappointed Intenders (n=153, 10.6%):**
+100% rated AI complexity as Very Poor. Almost Right frustration (52.3%)
+and Debugging Slower (50.3%). Still actively learning (43.1%) despite
+disappointment.
+PM intervention: accuracy transparency, confidence scores, steer toward
+reliable use cases — boilerplate generation, documentation drafting,
+test scaffolding.
+
+**Key insight from clustering:**
+The predictive model correctly identified intenders as a group but
+masked internal heterogeneity. Clusters 0 and 1 require opposite
+interventions — Cluster 0 needs a frictionless entry point
+(simplicity), Cluster 1 needs a breakthrough moment (depth). A single
+onboarding strategy underserves both. Cluster 2 converted developers
+become credible product champions — their earned skepticism makes their
+endorsement more persuasive than a first-time adopter's.
+
+**Why train data only:**
+Clustering is unsupervised and technically has no leakage risk.
+Training data used for consistency with Act 2 modeling conventions.
+Full intender population (n=1,797) would produce identical personas.
 
 ---
 
