@@ -32,6 +32,7 @@
 | D-11 | Model sequencing and evaluation metric | 2 |
 | D-12 | Output design — what a PM walks away with | 2 |
 | D-13 | Final feature confirmations from EDA | 2 |
+| D-14 | Modeling results and key findings | 2 |
 
 ---
 
@@ -634,6 +635,65 @@ EDA showed similar influence profiles between intenders and
 rejectors. Active users show higher influence but this appears
 to be a consequence of adoption rather than a predictor of intent.
 Kept in for now — expect low importance in model.
+
+---
+
+### D-14 | Modeling Results and Key Findings
+
+**Model performance:**
+Random Forest AUC-ROC 0.8543, Logistic Regression AUC-ROC 0.8537,
+CART AUC-ROC 0.8332. All three above the 0.7 useful threshold.
+RF and LR essentially identical — confirming the 17-feature trimmed
+set preserved all meaningful signal.
+
+**Key finding 1 — Sentiment dominates:**
+AI Sentiment Very Unfavorable is the single most important feature
+at 0.32 RF importance. Odds ratio 0.041 — developers with very
+unfavorable sentiment are 24x more likely to be rejectors than
+intenders. Consistent across all three models as the first CART split.
+
+**Key finding 2 — Active learning is the strongest intender signal:**
+Actively Learned AI Tooling ranks 2nd in RF importance at 0.11,
+odds ratio 2.602. Developers who actively learned AI tooling are
+2.6x more likely to be intenders. The gap is behavioral not
+attitudinal — intenders have invested in preparation but not
+crossed over to committed use.
+
+**Key finding 3 — Perceived quality uncertainty keeps intenders stuck:**
+AI Complexity Good Not Great odds ratio 2.037, AI Almost Right Not
+Quite odds ratio 1.221. Intenders have tried AI, found it partially
+useful but not reliably enough. Output quality perception is the
+specific friction point.
+
+**Key finding 4 — Demographics are weak predictors:**
+43 of 60 features trimmed with importance below 0.01. OrgSize,
+Industry, DevType, ICorPM, PurchaseInfluence did not appear in
+top 10. The intender gap is attitudinal and behavioral, not
+demographic.
+
+**Three CART personas:**
+- Path 1 — The Hesitant Intender: n=948, 61.5% intender probability.
+  Not hostile toward AI, not actively learning, no strong complexity
+  opinion. Blocked by inertia not hostility. PM intervention: low
+  friction first-use trigger.
+- Path 2 — The Firm Young Rejector: n=763, 97.3% rejector probability.
+  Very unfavorable sentiment, young (18-34), no job threat concern.
+  Ideological rejection. Do not spend acquisition resources here.
+- Path 3 — The Experienced Rejector: n=698, 92.6% rejector probability.
+  Very unfavorable sentiment, age 35+, 19.5+ years coding experience.
+  Deep-rooted skepticism. Hard to move.
+
+**VIF check:** All 17 features passed. Highest VIF 2.96, no trimming
+required at the VIF > 5 threshold.
+
+**Clustering decision:**
+Proceeding with Act 3 clustering on intenders only. Although Very
+Unfavorable sentiment exceeded the 0.25 dominance threshold in the
+full model, this feature has near-zero variance within the
+intender-only group (intenders by definition do not hold very
+unfavorable sentiment at high rates). Clustering on attitude variables
+within intenders may reveal meaningful sub-personas not visible in
+the full intenders-vs-rejectors model.
 
 ---
 
